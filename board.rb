@@ -13,6 +13,15 @@ class Board
 
   end
 
+  def add_piece(piece, pos)
+    self[pos] = piece
+  end
+
+  def []=(pos, piece)
+    i, j = pos
+    @grid[i][j] = piece
+  end
+
   def fill_back_row(color)
     pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Rook]
 
@@ -22,6 +31,14 @@ class Board
       piece_class.new(color, self, [i,j])
     end
 
+  end
+
+  def fill_pawn_row(color)
+    i = (color == :white) ? 6 : 1
+
+    (0..7).each do |j|
+      Pawn.new(color, self, [i, j])
+    end
   end
 
   def make_grid
