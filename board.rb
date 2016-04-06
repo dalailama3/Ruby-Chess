@@ -10,13 +10,22 @@ class Board
 
   def move(start, end_pos)
     #check if start pos if empty on Board
+    raise "Select a piece" if empty?(start)
+    start_piece = self[start]
+    end_piece = self[end_pos]
+    raise "Can't move there, own piece is in the way" if start_piece.color == end_piece.color
 
-    #ok, if there is a piece on start pos, then check to see if there is a piece on end_pos
 
-    #if no piece => move it there if piece's moves includes start pos
-    # else check to see if piece on end_pos if of opposite color and is in piece's moves
+    if start_piece.moves.include? end_pos
+      self[start] = nil
+      add_piece(start_piece, end_pos)
+    else
+      raise "Can't move there"
+    end
+  end
 
-
+  def empty?(pos)
+    self[pos].nil?
   end
 
   def add_piece(piece, pos)
