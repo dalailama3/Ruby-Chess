@@ -8,6 +8,10 @@ class Piece
     # board.add_piece(self, position)
   end
 
+  def opposite_color
+    return opposite = (color == :white) ? :black : :white
+  end
+
 
 end
 
