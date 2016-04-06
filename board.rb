@@ -24,6 +24,14 @@ class Board
 
   end
 
+  def fill_pawn_row(color)
+    i = (color == :white) ? 6 : 1
+
+    (0..7).each do |j|
+      Pawn.new(color, self, [i, j])
+    end
+  end
+
   def make_grid
     Array.new(8) { Array.new(8, sentinel)}
     [:white, :black].each do |color|
