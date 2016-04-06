@@ -9,12 +9,23 @@ class Board
   end
 
   def move(start, end_pos)
+    #check if start pos if empty on Board
+
+    #ok, if there is a piece on start pos, then check to see if there is a piece on end_pos
+
+    #if no piece => move it there if piece's moves includes start pos
+    # else check to see if piece on end_pos if of opposite color and is in piece's moves
 
 
   end
 
   def add_piece(piece, pos)
     self[pos] = piece
+  end
+
+  def [](pos)
+    i,j = pos
+    @grid[i][j]
   end
 
   def []=(pos, piece)
