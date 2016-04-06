@@ -13,6 +13,15 @@ class Board
 
   end
 
+  def add_piece(piece, pos)
+    self[pos] = piece
+  end
+
+  def []=(pos, piece)
+    i, j = pos
+    @grid[i][j] = piece
+  end
+
   def fill_back_row(color)
     pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Rook]
 
