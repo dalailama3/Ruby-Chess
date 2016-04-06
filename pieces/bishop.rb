@@ -1,14 +1,16 @@
 require_relative 'sliding_pieces.rb'
 class Bishop < SlidingPiece
-  def initialize(color, board, position, dir)
-    super(color, board, position, dir)
+  def initialize(color, board, position)
+    super(color, board, position)
   end
 
-
-  def moves
-    dir
+  def move_dirs
+    [
+      [1,1],
+      [1,-1],
+      [-1,1],
+      [-1,-1]
+    ]
 
   end
-
-
 end
