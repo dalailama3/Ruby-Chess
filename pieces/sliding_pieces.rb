@@ -17,6 +17,8 @@ class SlidingPiece < Piece
     end
     moves
 
+    #still need to filter out moves to account for pieces blocking paths
+
   end
 
   def out_of_bounds(pos)
