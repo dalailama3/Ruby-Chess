@@ -7,6 +7,10 @@ class Pawn < SteppingPiece
     @first_move = true
   end
 
+  def symbol
+    symbol = (color == :white) ? ♙ : ♟
+  end
+
   #override moves method
   def moves
     pos = position

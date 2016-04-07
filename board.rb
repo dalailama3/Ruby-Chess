@@ -11,7 +11,7 @@ class Board
 
   def move(start, end_pos)
     #check if start pos if empty on Board
-    raise "Select a piece" if empty?(start)
+    raise "Select a piece!" if empty?(start)
     start_piece = self[start]
 
     if start_piece.moves.include? end_pos
@@ -23,7 +23,7 @@ class Board
         start_piece.first_move = false
       end
     else
-      raise "Can't move there"
+      raise "Illegal move"
     end
   end
 

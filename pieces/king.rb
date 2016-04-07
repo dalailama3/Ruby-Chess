@@ -4,6 +4,10 @@ class King < SteppingPiece
     super(color, board, position)
   end
 
+  def symbol
+    symbol = (color == :white) ? ♔ : ♚
+  end
+
   def move_dirs
     [
       [0,1],

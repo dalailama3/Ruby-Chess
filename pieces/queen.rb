@@ -4,6 +4,9 @@ class Queen < SlidingPiece
     super(color, board, position)
   end
 
+  def symbol
+    symbol = (color == :white) ? ♕ : ♛
+  end
   def move_dirs
     [
       [1,1],
