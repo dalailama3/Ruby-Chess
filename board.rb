@@ -13,13 +13,15 @@ class Board
     #check if start pos if empty on Board
     raise "Select a piece" if empty?(start)
     start_piece = self[start]
-    end_piece = self[end_pos]
-    raise "Can't move there, own piece is in the way" if start_piece.color == end_piece.color
-
 
     if start_piece.moves.include? end_pos
       self[start] = nil
       add_piece(start_piece, end_pos)
+      #update piece's position
+      start_piece.position = end_pos
+      if start_piece.class == Pawn
+        start_piece.first_move = false
+      end
     else
       raise "Can't move there"
     end

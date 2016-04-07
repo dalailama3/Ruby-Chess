@@ -1,6 +1,7 @@
 require_relative 'stepping_pieces'
 
 class Pawn < SteppingPiece
+  attr_accessor :first_move
   def initialize(color, board, position)
     super(color, board, position)
     @first_move = true
