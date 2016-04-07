@@ -1,20 +1,41 @@
 require_relative 'pieces.rb'
+require 'byebug'
 
 class Board
-
+  attr_reader :grid
   def initialize
-    @grid = make_grid
+    make_grid
     @sentinel = NullPiece.instance
 
   end
 
   def move(start, end_pos)
+    #check if start pos if empty on Board
+    raise "Select a piece" if empty?(start)
+    start_piece = self[start]
+    end_piece = self[end_pos]
+    raise "Can't move there, own piece is in the way" if start_piece.color == end_piece.color
 
 
+    if start_piece.moves.include? end_pos
+      self[start] = nil
+      add_piece(start_piece, end_pos)
+    else
+      raise "Can't move there"
+    end
+  end
+
+  def empty?(pos)
+    self[pos].nil?
   end
 
   def add_piece(piece, pos)
     self[pos] = piece
+  end
+
+  def [](pos)
+    i,j = pos
+    @grid[i][j]
   end
 
   def []=(pos, piece)
@@ -22,8 +43,9 @@ class Board
     @grid[i][j] = piece
   end
 
+
   def fill_back_row(color)
-    pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Rook]
+    pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
     i = (color == :white) ? 7 : 0
 
@@ -42,7 +64,7 @@ class Board
   end
 
   def make_grid
-    Array.new(8) { Array.new(8, sentinel)}
+    @grid = Array.new(8) { Array.new(8, sentinel)}
     [:white, :black].each do |color|
       fill_back_row(color)
       fill_pawn_row(color)

@@ -1,7 +1,7 @@
 require 'singleton'
 
 class Piece
-  attr_reader :board, :position, :color
+  attr_accessor :board, :position, :color
   def initialize(color, board, position)
     @color, @board, @position = color, board, position
 
@@ -9,7 +9,11 @@ class Piece
   end
 
   def opposite_color
-    return opposite = (color == :white) ? :black : :white
+    if color == :white
+      :black
+    elsif color == :black
+      :white
+    end
   end
 
 

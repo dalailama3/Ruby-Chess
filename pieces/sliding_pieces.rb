@@ -15,7 +15,7 @@ class SlidingPiece < Piece
         new_pos = [(new_pos[0] + dir[0]), new_pos[1] + dir[1]]
       end
       #want to include the pos in which the impeding piece is of opposite_color to our piece
-      if board[new_pos] != NullPiece.instance && board[new_pos].opposite_color == self.color
+      if !out_of_bounds(new_pos) && !board.empty?(new_pos) && board[new_pos].opposite_color == self.color
         moves << new_pos
       end
     end
@@ -27,7 +27,7 @@ class SlidingPiece < Piece
   end
 
   def piece_in_way(pos)
-    board[pos] != NullPiece.instance
+    board[pos] != nil
 
   end
 
