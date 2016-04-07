@@ -1,11 +1,18 @@
 require 'colorize'
 
 class Display
+  include Cursorable
   attr_reader :board
+  attr_accessor :cursor
   def initialize(board)
     @board = board
-    @cursor = nil
+    @cursor = [6,4]
     @selected = false
+    startCursor
+  end
+
+  def startCursor
+
   end
 
   def render
@@ -14,10 +21,21 @@ class Display
       row_str = ""
       (0..(board.grid[i].length-1)).each do |j|
         if board.empty?([i, j])
-          row_str += ((i + j) % 2 == 0) ? "  ".on_green : "  ".on_blue
+          if [i,j] == cursor
+            row_str += "  ".on_yellow
+          else
+            row_str += ((i + j) % 2 == 0) ? "  ".on_green : "  ".on_blue
+          end
+
         else
-          row_str += ((i + j) % 2 == 0) ? board[[i,j]].symbol.on_green : board.grid[[i,j]].symbol.on_blue
+          if [i,j] == cursor
+            row_str += padded(board[[i,j]].symbol).on_yellow
+          else
+            row_str += ((i + j) % 2 == 0) ? padded(board[[i,j]].symbol).on_green : padded(board[[i,j]].symbol).on_blue
+          end
         end
+
+
       end
       row_str += "\n"
       result += row_str
@@ -25,7 +43,7 @@ class Display
     puts result
   end
 
-
-
-
+  def padded(str)
+    return str.center(2)
+  end
 end
