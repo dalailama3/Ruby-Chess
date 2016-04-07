@@ -1,4 +1,4 @@
-require_relative 'piece'
+require_relative 'stepping_pieces'
 class King < SteppingPiece
   def initialize(color, board, position)
     super(color, board, position)

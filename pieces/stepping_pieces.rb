@@ -11,6 +11,10 @@ class SteppingPiece < Piece
     move_dirs.each do |dir|
       moves << [pos[0] + dir[0], pos[1] + dir[1]]
     end
-    moves
+    moves.reject { |move| is_own_piece(move) }
+  end
+
+  def is_own_piece(pos)
+    board[pos] != NullPiece.instant && board[pos].color == self.color
   end
 end
