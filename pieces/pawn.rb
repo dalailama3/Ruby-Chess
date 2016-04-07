@@ -8,7 +8,7 @@ class Pawn < SteppingPiece
   end
 
   def symbol
-    symbol = (color == :white) ? ♙ : ♟
+    symbol = (color == :white) ? " ♙ " : " ♟ "
   end
 
   #override moves method

@@ -5,7 +5,7 @@ class Knight < SteppingPiece
   end
 
   def symbol
-    symbol = (color == :white) ? ♘ : ♞
+    symbol = (color == :white) ? " ♘ " : " ♞ "
   end
 
   def move_dirs

@@ -23,6 +23,8 @@ end
 
 class NullPiece
   include Singleton
-
+  def symbol
+    " "
+  end
 
 end
