@@ -5,7 +5,7 @@ class Piece
   def initialize(color, board, position)
     @color, @board, @position = color, board, position
 
-    # board.add_piece(self, position)
+    board.add_piece(self, position)
   end
 
   def opposite_color
@@ -14,9 +14,6 @@ class Piece
 
 
 end
-
-
-
 
 
 class NullPiece

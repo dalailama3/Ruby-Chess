@@ -16,6 +16,13 @@ class Pawn < SteppingPiece
       moves << [pos[0] + steps * 2, pos[1]]
     end
 
+    taking_squares = [[pos[0] + steps, pos[1] + 1], [pos[0] + steps, pos[1] - 1]]
+    taking_square.each do |square|
+      if board[square] != NullPiece.instant && board[square].color != self.color
+        moves << square
+      end
+    end
+
     moves
 
   end
