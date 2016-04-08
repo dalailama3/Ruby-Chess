@@ -13,11 +13,13 @@ class SteppingPiece < Piece
       moves << [pos[0] + dir[0], pos[1] + dir[1]]
     end
 
-    moves.reject { |move| not_own_piece?(move) || out_of_bounds(move) }
+    moves.reject { |move| own_piece_there?(move) || out_of_bounds(move) }
   end
 
-  def not_own_piece?(pos)
-    board[pos] == nil || board[pos].color != self.color
+  def own_piece_there?(pos)
+    if !out_of_bounds(pos)
+      return !board.empty?(pos) && board[pos].color == self.color
+    end
   end
 
 
