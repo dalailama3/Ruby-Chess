@@ -37,12 +37,31 @@ class Board
     enemy_pieces.any? { |enemy| enemy.moves.include? king_pos }
   end
 
+  def checkmate?(color)
+    #if in_check?, check all your own pieces to see if they have any VALID moves"
+    if in_check?
+      own_pieces = get_own_pieces(color)
+      own_pieces.all? { |piece| piece.valid_moves == [] }
+    end
+  end
+
   def find_king_pos(color)
     grid.each_with_index do |row, i|
       row.each_with_index do |col, j|
         return [i,j] if self[[i,j]].class == King && self[[i,j]].color == color
       end
     end
+  end
+
+  def get_own_pieces(color)
+    pieces = []
+    grid.each_with_index do |row, i|
+      row.each_with_index do |col, j|
+        pieces << self[[i,j]] if !empty?([i,j]) && self[[i,j]].opposite_color != color
+      end
+    end
+    pieces
+
   end
 
   def get_enemy_pieces(color)
