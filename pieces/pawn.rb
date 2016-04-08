@@ -18,7 +18,7 @@ class Pawn < SteppingPiece
     steps = (color == :white) ? -1 : 1
     moves << [pos[0] + steps, pos[1]]
     if @first_move
-      moves << [pos[0] + steps * 2, pos[1]]
+      moves << [pos[0] + steps * 2, pos[1]] if board.empty?([pos[0] + steps * 2, pos[1]])
     end
 
     taking_squares = [[pos[0] + steps, pos[1] + 1], [pos[0] + steps, pos[1] - 1]]

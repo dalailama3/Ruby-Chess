@@ -20,7 +20,7 @@ class Board
     raise "Select a piece!" if empty?(start)
     start_piece = self[start]
 
-    if start_piece.moves.include? end_pos
+    if start_piece.valid_moves.include? end_pos
       self[start] = nil
       add_piece(start_piece, end_pos)
       #update piece's position
@@ -58,11 +58,11 @@ class Board
 
   def checkmate?(color)
     #if in_check?, check all your own pieces to see if they have any VALID moves"
-    if in_check?
+    if in_check?(color)
       own_pieces = get_own_pieces(color)
       return own_pieces.all? { |piece| piece.valid_moves == [] }
     end
-    return false
+    
   end
 
   def find_king_pos(color)
