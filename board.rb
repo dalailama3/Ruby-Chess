@@ -31,6 +31,30 @@ class Board
     self[pos].nil?
   end
 
+  def in_check?(color)
+    king_pos = find_king_pos(color)
+    enemy_pieces = get_enemy_pieces(color)
+    enemy_pieces.any? { |enemy| enemy.moves.include? king_pos }
+  end
+
+  def find_king_pos(color)
+    grid.each_with_index do |row, i|
+      row.each_with_index do |col, j|
+        return [i,j] if self[[i,j]].class == King && self[[i,j]].color == color
+      end
+    end
+  end
+
+  def get_enemy_pieces(color)
+    enemies = []
+    grid.each_with_index do |row, i|
+      row.each_with_index do |col, j|
+        enemies << self[[i,j]] if !empty?([i,j]) && self[[i,j]].opposite_color == color
+      end
+    end
+    enemies
+  end
+
   def add_piece(piece, pos)
     self[pos] = piece
   end
