@@ -45,6 +45,10 @@ class Board
     @grid[i][j] = piece
   end
 
+  def in_bounds?(pos)
+    pos.all? { |coord| coord >=0 && coord <= 7 }
+  end
+
 
   def fill_back_row(color)
     pieces = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
