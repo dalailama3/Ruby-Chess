@@ -3,8 +3,8 @@ require 'byebug'
 
 class Board
   attr_reader :grid
-  def initialize
-    make_grid
+  def initialize(fill = true)
+    make_grid(fill)
     @sentinel = NullPiece.instance
 
   end
@@ -31,6 +31,19 @@ class Board
     self[pos].nil?
   end
 
+  def pieces
+    grid.flatten.reject { |piece| piece == nil }
+  end
+
+  def deep_dup
+    board = Board.new(false)
+
+    pieces.each do |piece|
+      piece.class.new(piece.color, board, piece.position)
+    end
+    return board
+  end
+
   def in_check?(color)
     king_pos = find_king_pos(color)
     enemy_pieces = get_enemy_pieces(color)
@@ -41,8 +54,9 @@ class Board
     #if in_check?, check all your own pieces to see if they have any VALID moves"
     if in_check?
       own_pieces = get_own_pieces(color)
-      own_pieces.all? { |piece| piece.valid_moves == [] }
+      return own_pieces.all? { |piece| piece.valid_moves == [] }
     end
+    return false
   end
 
   def find_king_pos(color)
@@ -112,8 +126,9 @@ class Board
     end
   end
 
-  def make_grid
+  def make_grid(fill)
     @grid = Array.new(8) { Array.new(8, sentinel)}
+    return unless fill
     [:white, :black].each do |color|
       fill_back_row(color)
       fill_pawn_row(color)
