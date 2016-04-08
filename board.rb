@@ -9,6 +9,12 @@ class Board
 
   end
 
+  def move!(start, end_pos)
+    start_piece = self[start]
+    self[start] = nil
+    add_piece(start_piece, end_pos)
+  end
+
   def move(start, end_pos)
     #check if start pos if empty on Board
     raise "Select a piece!" if empty?(start)

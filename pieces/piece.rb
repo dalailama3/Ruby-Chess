@@ -19,7 +19,7 @@ class Piece
 
   def move_into_check?(move)
     board_copy = board.deep_dup
-    board_copy.move(self.position, move)
+    board_copy.move!(self.position, move)
     return true if board_copy.in_check?(self.color)
   end
 
