@@ -57,7 +57,7 @@ module Cursorable
      when :ctrl_c
        exit 0
      when :return, :space
-       handle_selection
+       @cursor
      when :left, :right, :up, :down
        update_pos(MOVES[key])
        nil
@@ -66,10 +66,6 @@ module Cursorable
      end
    end
 
-   def handle_selection
-     @previous_selection = @selected
-     @selected = @cursor
-   end
 
    def update_pos(diff)
     new_pos = [@cursor[0] + diff[0], @cursor[1] + diff[1]]

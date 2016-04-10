@@ -4,24 +4,20 @@ require_relative 'cursorable'
 class Display
   include Cursorable
 
-  attr_reader :board
-  attr_accessor :cursor, :selected, :previous_selection
+  attr_reader :board, :game, :messages
+  attr_accessor :cursor, :first_selection, :second_selection
 
   def initialize(board)
     @board = board
     @cursor = [6,4]
-    @previous_selection = nil
-    @selected = nil
-    render_board
-    start_cursor
-
+    @first_selection = nil
+    @second_selection = nil
+    @messages = {}
   end
 
-  def start_cursor
-    while true
-      get_input
-      render_board
-    end
+  def reset
+    first_selection = nil
+    second_selection = nil
   end
 
   def render_board
@@ -34,7 +30,7 @@ class Display
         if board.empty?([i, j])
           if [i,j] == @cursor
             row_str += "   ".on_yellow
-          elsif [i,j] == @previous_selection || [i,j] == @selected
+          elsif [i,j] == @first_selection || [i,j] == @second_selection
             row_str += "   ".on_light_red
           else
             row_str += ((i + j) % 2 == 0) ? "   ".on_light_green : "   ".on_cyan
@@ -42,7 +38,7 @@ class Display
         else
           if [i,j] == @cursor
             row_str += board[[i,j]].symbol.on_yellow
-          elsif [i,j] == @previous_selection || [i,j] == @selected
+          elsif [i,j] == @first_selection || [i,j] == @second_selection
             row_str += board[[i,j]].symbol.on_light_red
           else
             row_str += ((i + j) % 2 == 0) ? board[[i,j]].symbol.on_light_green : board[[i,j]].symbol.on_cyan
@@ -54,6 +50,9 @@ class Display
     end
 
     puts result
+    @messages.each do |k, v|
+      puts "#{v}"
+    end
   end
 
   def padded(str)

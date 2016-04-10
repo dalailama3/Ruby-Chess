@@ -28,6 +28,7 @@ class Board
       if start_piece.class == Pawn
         start_piece.first_move = false
       end
+      return true
     else
       raise "Illegal move"
     end
@@ -62,7 +63,7 @@ class Board
       own_pieces = get_own_pieces(color)
       return own_pieces.all? { |piece| piece.valid_moves == [] }
     end
-    
+
   end
 
   def find_king_pos(color)
