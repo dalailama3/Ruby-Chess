@@ -16,8 +16,9 @@ class Display
   end
 
   def reset
-    first_selection = nil
-    second_selection = nil
+    # first_selection = nil
+    # second_selection = nil
+    @messages.delete(:error)
   end
 
   def render_board

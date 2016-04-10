@@ -18,11 +18,13 @@ class HumanPlayer
         # display.second_selection = end_pos
         # display.render_board
 
-        display.reset
+        display.reset if end_pos
       else
         puts "#{color}'s turn.  Move from where?"
         start = display.get_input
         # display.first_selection = start
+
+        display.reset if start
       end
     end
     [start, end_pos]
