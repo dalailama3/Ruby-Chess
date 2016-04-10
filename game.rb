@@ -31,7 +31,9 @@ class Game
           retry
         end
       end
-      display.render
+      display.render_board
+      swap_turn
+      puts "Game Over.  #{current_player} wins!"
     end
 
     def swap_turn
