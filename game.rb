@@ -21,8 +21,8 @@ class Game
     def play
       until game_over?
         begin
-          start, end_pos = players[@current_player].play_turn
-          board.move(start, end_pos)
+          start, end_pos = players[current_player].play_turn
+          board.move(start, end_pos, current_player )
 
           swap_turn
 
@@ -37,7 +37,7 @@ class Game
     end
 
     def swap_turn
-      @current_player = (@current_player == :white) ? :black : :white
+      @current_player = (current_player == :white) ? :black : :white
     end
 
 

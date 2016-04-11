@@ -15,10 +15,10 @@ class Board
     add_piece(start_piece, end_pos)
   end
 
-  def move(start, end_pos)
-    #check if start pos if empty on Board
+  def move(start, end_pos, color)
     raise "Select a piece!" if empty?(start)
     start_piece = self[start]
+    raise "Select your own piece!" if start_piece.color != color
 
     if start_piece.valid_moves.include? end_pos
       self[start] = nil
