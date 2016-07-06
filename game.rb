@@ -39,7 +39,7 @@ class Game
     def swap_turn
       @current_player = (current_player == :white) ? :black : :white
     end
-
-
-
 end
+
+game = Game.new
+game.play
