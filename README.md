@@ -12,3 +12,5 @@ To play, you must first have Ruby installed on your computer.  Please follow thi
 4.  Run the command `ruby game.rb` to start a game.
 
 ![Welcome Screen](/screenshots/welcome-screen.png)
+
+![Checkmate](/screenshots/checkmate.png)
